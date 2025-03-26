@@ -65,7 +65,7 @@ int main() {
   clearBuffer(buffer);
 
   printBuffer(buffer);
-  shellSort(numbers, buffer);
+  quickSort(0, NUMBER_AMOUNT - 1, numbers, buffer);
 
   free(numbers);
   free(buffer);
