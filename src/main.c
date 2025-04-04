@@ -61,8 +61,21 @@ void printBuffer(char *buffer) {
   free(displayBuffer);
 }
 
-// get arg input an run algorithm
-int main() {
+void displaySupportedAlgorithms() {
+  printf("Supported Algorithms:\n");
+  printf("  Selection Sort: selection\n");
+  printf("  Insertion Sort: insertion\n");
+  printf("  Sequential Sort: sequential\n");
+  printf("  Shell Sort: shell\n");
+  printf("  Quick Sort: quick\n");
+}
+
+int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    displaySupportedAlgorithms();
+    return 0;
+  }
+
   int *numbers = malloc(sizeof(int) * NUMBER_AMOUNT);
 
   for (int i = 0; i < NUMBER_AMOUNT; i++) {
@@ -75,7 +88,22 @@ int main() {
   clearBuffer(buffer);
 
   printBuffer(buffer);
-  shellSort(numbers, buffer);
+
+  if (*argv[1] == *"selection") {
+    selectionSort(numbers, buffer);
+  } else if (*argv[1] == *"insertion") {
+    insertionSort(numbers, buffer);
+  } else if (*argv[1] == *"sequential") {
+    sequentialSort(numbers, buffer);
+  } else if (*argv[1] == *"shell") {
+    shellSort(numbers, buffer);
+  } else if (*argv[1] == *"quick") {
+    quickSort(0, NUMBER_AMOUNT, numbers, buffer);
+  } else {
+    displaySupportedAlgorithms();
+    return 0;
+  }
+
   clearLines(NUMBER_AMOUNT);
   mapNumbersToBuffer(buffer, numbers);
   printBuffer(buffer);
