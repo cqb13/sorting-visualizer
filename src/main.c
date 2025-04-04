@@ -44,14 +44,24 @@ void clearBuffer(char *buffer) {
 }
 
 void printBuffer(char *buffer) {
+  char *displayBuffer =
+      malloc(NUMBER_AMOUNT * (NUMBER_AMOUNT * 2 + 1) + 1 * sizeof(char));
+
+  char *ptr = displayBuffer;
   for (int y = 0; y < NUMBER_AMOUNT; y++) {
     for (int x = 0; x < NUMBER_AMOUNT; x++) {
-      printf("%c ", buffer[y * NUMBER_AMOUNT + x]);
+      *ptr++ = buffer[y * NUMBER_AMOUNT + x];
+      *ptr++ = ' ';
     }
-    printf("\n");
+    *ptr++ = '\n';
   }
+
+  *ptr = '\0';
+  printf("%s", displayBuffer);
+  free(displayBuffer);
 }
 
+// get arg input an run algorithm
 int main() {
   int *numbers = malloc(sizeof(int) * NUMBER_AMOUNT);
 
