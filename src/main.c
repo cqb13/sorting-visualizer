@@ -1,5 +1,10 @@
 #include "main.h"
-#include "algorithms.h"
+#include "algorithms/bubbleSort.h"
+#include "algorithms/insertionSort.h"
+#include "algorithms/mergeSort.h"
+#include "algorithms/quickSort.h"
+#include "algorithms/selectionSort.h"
+#include "algorithms/shellSort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -63,11 +68,12 @@ void printBuffer(char *buffer) {
 
 void displaySupportedAlgorithms() {
   printf("Supported Algorithms:\n");
-  printf("  Selection Sort: selection\n");
+  printf("  Bubble Sort: bubble\n");
   printf("  Insertion Sort: insertion\n");
-  printf("  Sequential Sort: sequential\n");
-  printf("  Shell Sort: shell\n");
+  printf("  Merge Sort: merge\n");
   printf("  Quick Sort: quick\n");
+  printf("  Selection Sort: selection\n");
+  printf("  Shell Sort: shell\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -89,16 +95,23 @@ int main(int argc, char *argv[]) {
 
   printBuffer(buffer);
 
+  for (int i = 0; i < NUMBER_AMOUNT; i++) {
+    printf("%d, ", numbers[i]);
+  }
+  printf("\n");
+
   if (*argv[1] == *"selection") {
     selectionSort(numbers, buffer);
   } else if (*argv[1] == *"insertion") {
     insertionSort(numbers, buffer);
-  } else if (*argv[1] == *"sequential") {
-    sequentialSort(numbers, buffer);
+  } else if (*argv[1] == *"bubble") {
+    bubbleSort(numbers, buffer);
   } else if (*argv[1] == *"shell") {
     shellSort(numbers, buffer);
   } else if (*argv[1] == *"quick") {
     quickSort(0, NUMBER_AMOUNT, numbers, buffer);
+  } else if (*argv[1] == *"merge") {
+    mergeSort(numbers, buffer, NUMBER_AMOUNT);
   } else {
     displaySupportedAlgorithms();
     return 0;
